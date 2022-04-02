@@ -1,0 +1,78 @@
+    $topshadow: 5px -7px 1px 5px rgba(0, 0, 0, 0.5);
+    $rightshadow: 10px 0px 5px 1px rgba(0, 0, 0, 0.5);
+    $centershadow: 2px 0px 5px 2px rgba(0, 0, 0, 0.5);
+    @mixin cubeStyle {
+        height: 100px;
+        border: solid 5px black;
+        border-radius: 15px;
+    }
+    
+    $colors :(1:red, 2:blue, 3:green, 4:yellow, 5:orange, 6:violet);
+    @function random_color() {
+        @return map-get($colors, random(6));
+    }
+    
+    .container {
+        margin-top: 50px;
+        .cubeBox {
+            height: 100vh;
+            @for $i from 1 through 9 {
+                .cube#{$i} {
+                    @include cubeStyle;
+                    background-color: random_color();
+                    @if $i <=3 {
+                        box-shadow: $topshadow;
+                    }
+                    @else if $i==6 {
+                        box-shadow: $rightshadow;
+                    }
+                    @else if $i==9 {
+                        box-shadow: $rightshadow;
+                    }
+                    @else {
+                        box-shadow: $centershadow;
+                    }
+                }
+            }
+        }
+    }
+    
+    @mixin switchColor($key) {
+        background-color: map-get($colors, $key) !important;
+    }
+    
+    .active1 {
+        @include switchColor(1);
+    }
+    
+    .active2 {
+        @include switchColor(2);
+    }
+    
+    .active3 {
+        @include switchColor(3);
+    }
+    
+    .active4 {
+        @include switchColor(4);
+    }
+    
+    .active5 {
+        @include switchColor(5);
+    }
+    
+    .active6 {
+        @include switchColor(6);
+    }
+    
+    .active7 {
+        @include switchColor(1);
+    }
+    
+    .active8 {
+        @include switchColor(2);
+    }
+    
+    .active9 {
+        @include switchColor(3);
+    }
